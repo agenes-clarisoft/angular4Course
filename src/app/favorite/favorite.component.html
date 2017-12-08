@@ -1,3 +1,5 @@
-<a href="javascript: void(0);" (click)="onClick()">
-  <span class="glyphicon" [class.glyphicon-star]="isFavorite" [class.glyphicon-star-empty]="!isFavorite"></span>
-</a>
+<span class="glyphicon"
+      [class.glyphicon-star]="isFavorite"
+      [class.glyphicon-star-empty]="!isFavorite"
+      (click)="onClick()">
+</span>
