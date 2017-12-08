@@ -1,5 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/throw';
+
+import {AppError} from "../common/app-error";
+import {NotFoundError} from "../common/not-found-error";
+import {BadInput} from "../common/bad-input";
 
 @Injectable()
 export class PostService {
@@ -9,19 +16,33 @@ export class PostService {
 
 
   getPosts() {
-    return this.http.get(this.url);
+    return this.http.get(this.url)
+      .catch(this.handleError);
   }
 
   createPost(post) {
-    return this.http.post(this.url, JSON.stringify(post));
+    return this.http.post(this.url, JSON.stringify(post))
+      .catch(this.handleError);
   }
 
   updatePost(post) {
     //this.http.post(this.url, JSON.stringify(post))
-    return this.http.patch(this.url + '/' + post.id, JSON.stringify({ isRead: true }));
+    return this.http.patch(this.url + '/' + post.id, JSON.stringify({ isRead: true }))
+      .catch(this.handleError);
   }
 
   deletePost(postId) {
-    return this.http.delete(this.url + '/' + postId);
+    return this.http.delete(this.url + '/' + postId)
+      .catch(this.handleError);
+  }
+
+  private handleError(error: Response) {
+    if (error.status === 404)
+      return Observable.throw(new NotFoundError());
+
+    if (error.status === 400)
+      return Observable.throw(new BadInput(error.json()));
+
+    return Observable.throw(new AppError(error.json()));
   }
 }

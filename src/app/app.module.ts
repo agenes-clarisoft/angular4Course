@@ -16,6 +16,8 @@ import { LikeComponent } from './like/like.component';
 import { InputFormatDirective } from './input-format.directive';
 import { ZippyComponent } from './zippy/zippy.component';
 import { PostsComponent } from './posts/posts.component';
+import {AppErrorHandler} from "./common/app-error-handler";
+import {ErrorHandler} from "@angular/core";
 
 @NgModule({
   declarations: [
@@ -38,7 +40,10 @@ import { PostsComponent } from './posts/posts.component';
   ],
   providers: [
     CoursesService,
-    PostService
+    PostService,
+    {
+      provide: ErrorHandler, useClass: AppErrorHandler
+    }
   ],
   bootstrap: [AppComponent]
 })
