@@ -1,10 +1,16 @@
 <h1>Welcome to {{title}}!!</h1>
 
-<bootstrap-panel>
-  <ng-container class="heading">Heading</ng-container>
-  <ng-container class="body">
-    <h2>Body</h2>
-    <div>Content ...</div>
-    <like [likesCount]="tweet.likesCount" [isActive]="tweet.isLiked"></like>
-  </ng-container>
-</bootstrap-panel>
+<div *ngIf="courses.length > 0; then coursesList else noCourses"></div>
+<ng-template #coursesList>
+  List of Courses
+</ng-template>
+<ng-template #noCourses>
+  No courses yet
+</ng-template>
+
+<div [hidden]="courses.length === 0">
+  List of Courses
+</div>
+<div [hidden]="courses.length !== 0">
+  No courses yet
+</div>
