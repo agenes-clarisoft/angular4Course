@@ -11,7 +11,7 @@ export class AppComponent {
 
   viewMode = 'smth';
 
-  courses;
+  courses = [];
 
   onAdd() {
     this.courses.push({ id: 4, name: 'Course 4'});
@@ -36,5 +36,12 @@ export class AppComponent {
 
   trackCourse(index, course) {
     return course ? course.id : undefined;
+  }
+
+  task = {
+    title: 'Review my app',
+    assignee: {
+      name: 'John Smith'
+    }
   }
 }

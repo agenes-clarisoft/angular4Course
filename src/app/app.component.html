@@ -1,5 +1,7 @@
 <h1>Welcome to {{title}}!!</h1>
 
+<favorite [is-favorite]="true"></favorite>
+
 <button (click)="onAdd()">Add</button>
 <button (click)="loadCourses()">Load Courses</button>
 
@@ -33,3 +35,5 @@
   <div *ngSwitchCase="'list'">List View Content</div>
   <div *ngSwitchDefault>Otherwise</div>
 </div>
+
+<span>{{ task.assignee?.name }}</span>
