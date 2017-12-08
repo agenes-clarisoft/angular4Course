@@ -9,12 +9,9 @@ import {FavoriteChangedEventArgs} from "./favorite/favorite.component";
 export class AppComponent {
   title = 'Angular app';
 
-  post = {
-    title: 'Title',
-    isFavorite: true
-  };
-
-  onFavoriteChange(eventArgs: FavoriteChangedEventArgs) {
-    console.log('changed: ', eventArgs);
+  tweet = {
+    body: 'here is the body of the tweet ...',
+    isLiked: true,
+    likesCount: 10
   }
 }
