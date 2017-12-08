@@ -9,7 +9,32 @@ import {FavoriteChangedEventArgs} from "./favorite/favorite.component";
 export class AppComponent {
   title = 'My App';
 
-  courses = [1, 2];
-
   viewMode = 'smth';
+
+  courses;
+
+  onAdd() {
+    this.courses.push({ id: 4, name: 'Course 4'});
+  }
+
+  onRemove(course) {
+    let index = this.courses.indexOf(course);
+    this.courses.splice(index, 1);
+  }
+
+  onChange(course) {
+    course.name = 'Changed';
+  }
+
+  loadCourses() {
+    this.courses = [
+      { id: 1, name: 'Course 1'},
+      { id: 2, name: 'Course 2'},
+      { id: 3, name: 'Course 3'}
+    ];
+  }
+
+  trackCourse(index, course) {
+    return course ? course.id : undefined;
+  }
 }
