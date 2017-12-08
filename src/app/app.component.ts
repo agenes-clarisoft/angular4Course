@@ -10,4 +10,6 @@ export class AppComponent {
   title = 'My App';
 
   courses = [1, 2];
+
+  viewMode = 'smth';
 }
