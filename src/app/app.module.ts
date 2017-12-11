@@ -8,16 +8,18 @@ import { CoursesComponent } from './courses.component';
 import { CourseComponent } from './course/course.component';
 import { CoursesService } from "./courses.service";
 import { PostService } from "./services/post.service";
-import {SummaryPipe} from "./summary.pipe";
+import { FollowersService } from "./services/followers.service";
+import { SummaryPipe } from "./summary.pipe";
 import { FavoriteComponent } from './favorite/favorite.component';
-import {TitleCasePipe} from "./title-case.pipe";
+import { TitleCasePipe } from "./title-case.pipe";
 import { PanelComponent } from './panel/panel.component';
 import { LikeComponent } from './like/like.component';
 import { InputFormatDirective } from './input-format.directive';
 import { ZippyComponent } from './zippy/zippy.component';
 import { PostsComponent } from './posts/posts.component';
-import {AppErrorHandler} from "./common/app-error-handler";
-import {ErrorHandler} from "@angular/core";
+import { AppErrorHandler } from "./common/app-error-handler";
+import { ErrorHandler } from "@angular/core";
+import { FollowersComponent } from './followers/followers.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,8 @@ import {ErrorHandler} from "@angular/core";
     LikeComponent,
     InputFormatDirective,
     ZippyComponent,
-    PostsComponent
+    PostsComponent,
+    FollowersComponent
   ],
   imports: [
     BrowserModule,
@@ -41,6 +44,7 @@ import {ErrorHandler} from "@angular/core";
   providers: [
     CoursesService,
     PostService,
+    FollowersService,
     {
       provide: ErrorHandler, useClass: AppErrorHandler
     }

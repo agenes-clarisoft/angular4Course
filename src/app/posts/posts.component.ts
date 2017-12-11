@@ -48,11 +48,11 @@ export class PostsComponent implements OnInit{
       });
   }
 
-  deletePost(post) {
+  /*deletePost(post) {
     let index = this.posts.indexOf(post);
     this.posts.splice(index, 1);
 
-    this.service.delete(345)
+    this.service.delete(post.id)
       .subscribe(
         null,
         (error: AppError) => {
@@ -62,6 +62,10 @@ export class PostsComponent implements OnInit{
             alert('this post has already been deleted');
           else throw error;
         });
+  }*/
+
+  deletePost(post) {
+    this.service.delete(post.id);
   }
 
 }
