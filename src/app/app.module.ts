@@ -1,38 +1,60 @@
+import { AUTH_PROVIDERS } from 'angular2-jwt';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { HttpModule, Http, BaseRequestOptions } from '@angular/http';
+import { RouterModule } from '@angular/router';
+import { MockBackend } from '@angular/http/testing';
 
 import { AppComponent } from './app.component';
-import { CoursesComponent } from './courses.component';
-import { CourseComponent } from './course/course.component';
-import {CoursesService} from "./courses.service";
-import {SummaryPipe} from "./summary.pipe";
-import { FavoriteComponent } from './favorite/favorite.component';
-import {TitleCasePipe} from "./title-case.pipe";
-import { PanelComponent } from './panel/panel.component';
-import { LikeComponent } from './like/like.component';
-import { InputFormatDirective } from './input-format.directive';
-import { ZippyComponent } from './zippy/zippy.component';
+import { HomeComponent } from './home/home.component';
+import { LoginComponent } from './login/login.component';
+import { SignupComponent } from './signup/signup.component';
+import { AdminComponent } from './admin/admin.component';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { NoAccessComponent } from './no-access/no-access.component';
+import { fakeBackendProvider } from './helpers/fake-backend';
+import { OrderService } from './services/order.service';
+import { AuthService } from './services/auth.service';
+import { AuthGuard } from "./services/auth-guard.service";
+import { AdminAuthGuard } from "./services/admin-auth-guard.service";
 
 @NgModule({
   declarations: [
     AppComponent,
-    CoursesComponent,
-    CourseComponent,
-    SummaryPipe,
-    TitleCasePipe,
-    FavoriteComponent,
-    PanelComponent,
-    LikeComponent,
-    InputFormatDirective,
-    ZippyComponent
+    LoginComponent,
+    SignupComponent,
+    AdminComponent,
+    HomeComponent,
+    NotFoundComponent,
+    NoAccessComponent
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    HttpModule,
+    RouterModule.forRoot([
+      { path: '', component: HomeComponent },
+      {
+        path: 'admin',
+        component: AdminComponent,
+        canActivate: [AuthGuard, AdminAuthGuard]
+      },
+      { path: 'login', component: LoginComponent },
+      { path: 'no-access', component: NoAccessComponent }
+    ])
   ],
   providers: [
-    CoursesService
+    OrderService,
+    AuthService,
+    AuthGuard,
+    AdminAuthGuard,
+    AUTH_PROVIDERS,
+
+    // For creating a mock back-end. You don't need these in a real app.
+    fakeBackendProvider,
+    MockBackend,
+    BaseRequestOptions
   ],
   bootstrap: [AppComponent]
 })
